@@ -15,6 +15,7 @@ public class Clock {
     }
 
     public void setTime(Calendar time) {
+        this.time.clear();
         this.time.setTime(time.getTime());
         this.time.add(Calendar.HOUR, timeZone);
     }

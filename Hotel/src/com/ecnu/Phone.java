@@ -28,6 +28,7 @@ public class Phone {
 
     private void setClocksTime() {
         Calendar ZeroZoneTime = Calendar.getInstance();
+        ZeroZoneTime.setTime(this.time.getTime());
         ZeroZoneTime.add(Calendar.HOUR, -8);
         for (int i = 0; i < this.clocks.length; i++) {
             this.clocks[i].setTime(ZeroZoneTime);
@@ -39,6 +40,7 @@ public class Phone {
         for (int i = 0; i < this.clocks.length; i++) {
             this.clocks[i].showTime();
         }
+        System.out.println();
     }
 
     public void showTime() {
