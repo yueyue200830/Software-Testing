@@ -1,54 +1,36 @@
 package com.ecnu;
 
-import java.util.Date;
+import java.util.Calendar;
 
 public class Phone {
-    private Date time;
+    private Calendar time;
     private int timeZone;
     private Clock[] clocks;
 
     // Generate time by current time. Suppose we are always in +8 timezone.
-    Phone () {
+    Phone (Clock[] clocks) {
         this.timeZone = 8;
-        this.time = new Date();
-        this.clocks = new Clock[5];
-        this.clocks[0] = new Clock(8, "Beijing");
-        this.clocks[1] = new Clock(0, "London");
-        this.clocks[2] = new Clock(-4, "Moscow");
-        this.clocks[3] = new Clock(10, "Sydney");
-        this.clocks[4] = new Clock(-5, "New York");
-        this.setClocksTime();
-    }
-
-    Phone (Date time) {
-        this.timeZone = 8;
-        this.time = time;
-        this.clocks = new Clock[5];
-        this.clocks[0] = new Clock(8, "Beijing");
-        this.clocks[1] = new Clock(0, "London");
-        this.clocks[2] = new Clock(-4, "Moscow");
-        this.clocks[3] = new Clock(10, "Sydney");
-        this.clocks[4] = new Clock(-5, "New York");
+        this.time = Calendar.getInstance();
+        this.clocks = clocks;
         this.setClocksTime();
     }
 
     // Set time by current time. Suppose we are always in +8 timezone.
     public void setTime() {
-        this.time.setTime((new Date()).getTime());
+        this.time = Calendar.getInstance();
         this.setClocksTime();
     }
 
-    public void setTime(Date time) {
+    public void setTime(Calendar time) {
         this.time.setTime(time.getTime());
         this.setClocksTime();
     }
 
     private void setClocksTime() {
+        Calendar ZeroZoneTime = Calendar.getInstance();
+        ZeroZoneTime.add(Calendar.HOUR, -8);
         for (int i = 0; i < this.clocks.length; i++) {
-
-            long ms = this.time.getTime() - timeZone * 1000 * 60 * 60;
-            Date d = new Date(ms);
-            this.clocks[i].setTime(d);
+            this.clocks[i].setTime(ZeroZoneTime);
         }
     }
 
@@ -61,6 +43,6 @@ public class Phone {
 
     public void showTime() {
         System.out.print("The phone's time is ");
-        System.out.println(this.timeZone);
+        System.out.println(this.time.getTime());
     }
 }

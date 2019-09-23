@@ -1,32 +1,28 @@
 package com.ecnu;
 
-import java.util.Date;
+import java.util.Calendar;
 
 public class Clock {
-    private Date time;
+    private Calendar time;
     private int timeZone;
     private String place;
 
     Clock (int timeZone, String place) {
-        this.time = new Date();
+        this.time = Calendar.getInstance();
         this.timeZone = timeZone;
         this.place = place;
+        this.time.add(Calendar.HOUR, timeZone - 8);
     }
 
-    Clock (int timeZone, String place, Date currentTime) {
-        this.timeZone = timeZone;
-        this.time = new Date(currentTime.getTime() + timeZone * 1000 * 60 * 60);
-        this.place = place;
-    }
-
-    public void setTime(Date currentTime) {
-        this.time.setTime(currentTime.getTime() + timeZone * 1000 * 60 * 60);
+    public void setTime(Calendar time) {
+        this.time.setTime(time.getTime());
+        this.time.add(Calendar.HOUR, timeZone);
     }
 
     public void showTime() {
         System.out.print("This is " + this.place + ". ");
         System.out.print("It's time zone is " + this.timeZone + ". ");
         System.out.print("Current time is ");
-        System.out.println(this.time);
+        System.out.println(this.time.getTime());
     }
 }
