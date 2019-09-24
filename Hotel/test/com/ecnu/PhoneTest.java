@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Calendar;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -33,8 +35,23 @@ class PhoneTest {
 
     @Test
     @DisplayName("Test set clock's time")
-    void setClocksTime() {
+    void setClocksTime() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Calendar cPhone = phone.getTime();
 
+        Method setClocksTime = phone.getClass().getDeclaredMethod("setClocksTime");
+        setClocksTime.setAccessible(true);
+        setClocksTime.invoke(phone);
+
+        assertAll(
+                () -> assertEquals(clocks[0].getTime().getTime().getTime(), cPhone.getTime().getTime()),
+                () -> assertEquals(clocks[1].getTime().getTime().getTime(),
+                        cPhone.getTime().getTime() - 8 * 1000 * 60 * 60),
+                () -> assertEquals(clocks[2].getTime().getTime().getTime(),
+                        cPhone.getTime().getTime() - 12 * 1000 * 60 * 60),
+                () -> assertEquals(clocks[3].getTime().getTime().getTime(),
+                        cPhone.getTime().getTime() + 2 * 1000 * 60 * 60),
+                () -> assertEquals(clocks[4].getTime().getTime().getTime(),
+                        cPhone.getTime().getTime() - 13 * 1000 * 60 * 60)
+        );
     }
 }
