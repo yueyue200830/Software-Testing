@@ -26,6 +26,12 @@ public class Phone {
         this.setClocksTime();
     }
 
+    public Calendar getTime() {
+        Calendar c = Calendar.getInstance();
+        c.setTime(this.time.getTime());
+        return c;
+    }
+
     private void setClocksTime() {
         Calendar ZeroZoneTime = Calendar.getInstance();
         ZeroZoneTime.setTime(this.time.getTime());

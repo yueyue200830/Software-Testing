@@ -8,8 +8,8 @@ public class Clock {
     private String place;
 
     Clock (int timeZone, String place) {
-        this.time = Calendar.getInstance();
         this.timeZone = timeZone;
+        this.time = Calendar.getInstance();
         this.place = place;
         this.time.add(Calendar.HOUR, timeZone - 8);
     }
@@ -18,6 +18,12 @@ public class Clock {
         this.time.clear();
         this.time.setTime(time.getTime());
         this.time.add(Calendar.HOUR, timeZone);
+    }
+
+    public Calendar getTime() {
+        Calendar c = Calendar.getInstance();
+        c.setTime(this.time.getTime());
+        return c;
     }
 
     public void showTime() {
