@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Calendar;
@@ -53,5 +54,14 @@ class PhoneTest {
                 () -> assertEquals(clocks[4].getTime().getTime().getTime(),
                         cPhone.getTime().getTime() - 13 * 1000 * 60 * 60)
         );
+    }
+
+    @Test
+    @DisplayName("Test get time")
+    void getTime() throws NoSuchFieldException, IllegalAccessException {
+        Field field = phone.getClass().getDeclaredField("time");
+        field.setAccessible(true);
+        Calendar c = (Calendar) field.get(phone);
+        assertEquals(phone.getTime(), c);
     }
 }
