@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
+import java.lang.reflect.Field;
 import java.util.Calendar;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,5 +32,21 @@ class PhoneTest {
         // test called function in setTime, it should be called 5 times in this function.
         assertEquals(phone.getTime().getTime().getTime(), c.getTime().getTime(), "Set phone time error.");
         verify(clockMock, times(10)).setTime(any());
+    }
+
+    @Test
+    @DisplayName("Test get time")
+    void getTime() throws NoSuchFieldException, IllegalAccessException {
+        Clock[] clocks = new Clock[5];
+        clocks[0] = new Clock(8, "Beijing");
+        clocks[1] = new Clock(0, "London");
+        clocks[2] = new Clock(-4, "Moscow");
+        clocks[3] = new Clock(10, "Sydney");
+        clocks[4] = new Clock(-5, "New York");
+        Phone phone = new Phone(clocks);
+        Field field = phone.getClass().getDeclaredField("time");
+        field.setAccessible(true);
+        Calendar c = (Calendar) field.get(phone);
+        assertEquals(phone.getTime(), c);
     }
 }
