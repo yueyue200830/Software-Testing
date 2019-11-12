@@ -15,7 +15,7 @@ public class CommentTest {
     @Transactional
     public void testComment() {
         Comment comment = new Comment();
-        Long id = new Long(10);
+        Long id = 10L;
         String user = "Test";
         Date time = new Date();
         String c = "Hello test";
