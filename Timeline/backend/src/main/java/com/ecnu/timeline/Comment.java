@@ -3,6 +3,10 @@ package com.ecnu.timeline;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * @author Jiayi Zhu
+ * @date 2019-10-14
+ */
 @Entity
 @Table(name = "comment")
 public class Comment {
@@ -50,7 +54,7 @@ public class Comment {
     }
 
     public void setTime(Date time) {
-        this.time.setTime(time.getTime());
+        this.time = new Date(time.getTime());
     }
 
     public String getComment() {
