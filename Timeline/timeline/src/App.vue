@@ -109,7 +109,8 @@ export default {
 
   .main-card {
     margin: 0 auto;
-    width: 600px;
+    max-width: 600px;
+    width: 100%;
   }
 
   .more {
@@ -123,7 +124,7 @@ export default {
   }
 
   .box-card {
-    width: 600px;
+    width: 100%;
     height: 300px;
     text-align: left;
     margin: 10px;
