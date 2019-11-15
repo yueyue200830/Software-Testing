@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <el-container>
-      <el-header>Timeline</el-header>
       <el-main>
-        <el-button type="primary" icon="el-icon-refresh-right" circle class="refresh" @click="refresh"></el-button>
+        <div class="header">Timeline</div>
+        <el-button icon="el-icon-refresh-right" circle class="refresh" @click="refresh"></el-button>
         <div class="main-card" v-for="comment in comments" :key="comment.id">
           <el-card class="box-card" shadow="hover">
             <div slot="header" class="headline">
@@ -21,7 +21,7 @@
           </el-card>
         </div>
         <div class="more">
-          <el-button type="primary" :loading="false" @click="loadMore" class="load-more">
+          <el-button :loading="false" @click="loadMore" class="load-more">
             More
           </el-button>
         </div>
@@ -89,14 +89,22 @@ export default {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
+    background-image: linear-gradient(-90deg, #ACB6E5 0%, #91EAE4 100%);
+  }
+
+  .header {
+    margin: 40px 0 50px;
+    font-size: 36px;
+    color: white;
+
   }
 
   .el-container {
     min-height: 100vh;
   }
 
-  .el-header, .el-footer {
-    background-color: #545c64;
+  .el-footer {
+    background-image: linear-gradient(-90deg, #ACB6E5 0%, #91EAE4 100%);
     color: white;
     text-align: center;
     line-height: 60px;
@@ -104,7 +112,7 @@ export default {
 
   .el-main {
     text-align: center;
-    min-height: calc(100vh - 120px);
+    min-height: calc(100vh - 60px);
   }
 
   .main-card {
