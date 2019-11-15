@@ -5,26 +5,40 @@
         <div class="header">Timeline</div>
         <el-button icon="el-icon-refresh-right" circle class="refresh" @click="refresh"></el-button>
         <div class="main-card" v-for="comment in comments" :key="comment.id">
-          <el-card class="box-card" shadow="hover">
-            <div slot="header" class="headline">
-              <div class="user">{{ comment.user }}</div>
-              <div class="time">{{ convertTime(comment.time) }}</div>
-            </div>
-            <div class="card-content">
-              <div class="text">
-                {{ comment.comment }}
+          <transition
+                  appear
+                  appear-class="box-card-appear-class"
+                  appear-active-class="box-card-appear-active-class"
+                  :duration="1000"
+          >
+            <el-card class="box-card" shadow="always">
+              <div slot="header" class="headline">
+                <div class="user">{{ comment.user }}</div>
+                <div class="time">{{ convertTime(comment.time) }}</div>
               </div>
-              <el-image class="image" fit="contain" v-if="comment.image != null"
-                        :src="comment.image">
-              </el-image>
-            </div>
-          </el-card>
+              <div class="card-content">
+                <div class="text">
+                  {{ comment.comment }}
+                </div>
+                <el-image class="image" fit="contain" v-if="comment.image != null"
+                          :src="comment.image">
+                </el-image>
+              </div>
+            </el-card>
+          </transition>
         </div>
-        <div class="more">
-          <el-button :loading="false" @click="loadMore" class="load-more">
-            More
-          </el-button>
-        </div>
+        <transition
+                appear
+                appear-class="box-card-appear-class"
+                appear-active-class="box-card-appear-active-class"
+                :duration="1000"
+        >
+          <div class="more">
+            <el-button :loading="false" @click="loadMore" class="load-more">
+              More
+            </el-button>
+          </div>
+        </transition>
       </el-main>
       <el-footer>Software Testing - Project 2 by Jiayi Zhu</el-footer>
     </el-container>
@@ -94,7 +108,7 @@ export default {
 
   .header {
     margin: 40px 0 50px;
-    font-size: 36px;
+    font-size: 48px;
     color: white;
 
   }
@@ -116,13 +130,13 @@ export default {
   }
 
   .main-card {
-    margin: 0 auto;
+    margin: 20px auto;
     max-width: 600px;
     width: 100%;
   }
 
   .more {
-    margin: 20px;
+    margin: 50px auto 20px;
   }
 
   .refresh {
@@ -131,17 +145,27 @@ export default {
     top: 100px;
   }
 
+  .box-card-appear-class {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .box-card-appear-active-class {
+    transition: all 1s ease;
+  }
+
   .box-card {
-    width: 100%;
     height: 300px;
     text-align: left;
     margin: 10px;
+    background-color: rgba(255, 255, 255, .8) !important;
   }
 
   .headline {
     display: flex;
     flex-direction: row;
     height: 20px;
+    font-size: 15px;
   }
 
   .user {
