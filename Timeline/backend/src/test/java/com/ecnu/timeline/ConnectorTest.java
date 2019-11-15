@@ -2,6 +2,7 @@ package com.ecnu.timeline;
 
 import org.json.JSONObject;
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -34,6 +35,7 @@ public class ConnectorTest {
     CommentRepository commentRepository;
 
     @Test
+    @DisplayName("Test onCreate")
     public void testOnCreate() throws Exception {
         List<Comment> commentList = new ArrayList<>();
         Comment comment1 = new Comment();
@@ -84,6 +86,7 @@ public class ConnectorTest {
     }
 
     @Test
+    @DisplayName("Test loadMore")
     public void testLoadMore() throws Exception  {
         List<Comment> commentList = new ArrayList<>();
         Comment comment1 = new Comment();
@@ -124,6 +127,7 @@ public class ConnectorTest {
     }
 
     @Test
+    @DisplayName("Test refresh")
     public void testRefresh() throws Exception {
         List<Comment> commentList = new ArrayList<>();
         Comment comment1 = new Comment();
