@@ -11,6 +11,8 @@ This project has achieved reading comments in frontend with load more and refres
 A comment includes user, time and detail. 
 Image is optional for a comment.
 
+In a comment card, the height is settled. If the word exceeds the card, visitor can scroll to see extra words.
+
 
 ## About test
 
